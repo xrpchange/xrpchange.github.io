@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XRPChange</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+        }
+        header {
+            position: relative;
+            padding: 20px 40px;
+            min-height: 200px;
+            background-color: #1a1a1a;
+            overflow: hidden;
+            display: flex; /* Flexbox для управления расположением */
+            flex-wrap: wrap; /* Перенос элементов на узких экранах */
+            align-items: center;
+            justify-content: space-between;
+        }
+        .carbon-shape-1, .carbon-shape-2, .carbon-shape-3, .carbon-shape-4 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.7;
+        }
+        .carbon-shape-1 {
+            background: linear-gradient(45deg, #1f1f1f, #252525);
+            clip-path: polygon(0 0, 70% 0, 30% 100%, 0 100%);
+        }
+        .carbon-shape-2 {
+            background: linear-gradient(45deg, #404040, #454545);
+            clip-path: polygon(70% 0, 100% 0, 100% 60%, 30% 100%);
+        }
+        .carbon-shape-3 {
+            background: linear-gradient(45deg, #505050, #555555);
+            clip-path: polygon(0 40%, 30% 100%, 0 100%);
+        }
+        .carbon-shape-4 {
+            background: linear-gradient(45deg, #333333, #383838);
+            clip-path: polygon(50% 0, 100% 0, 100% 30%, 70% 60%);
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            z-index: 1;
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        .logo-container h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            font-size: 36px;
+            color: #fff;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .header-content {
+            text-align: center;
+            z-index: 1;
+            flex-grow: 1; /* Занима центральное пространство */
+            max-width: 600px; /* Ограничим ширину для читаемости */
+            margin: 0 auto;
+        }
+        .header-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            font-size: 28px;
+            color: #ddd;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .header-content p {
+            font-size: 18px;
+            color: #bbb;
+            margin: 10px 0;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #A8D5BA;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+        .button:hover {
+            background-color: #8ABF9A;
+            transform: translateY(-2px);
+        }
+        section {
+            padding: 50px 30px;
+            text-align: center;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .section-light {
+            background: linear-gradient(to bottom, #F5F5F5, #E8E8E8);
+        }
+        section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            font-size: 24px;
+            color: #2E8B57;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        section p, section li {
+            font-size: 16px;
+            color: #000;
+            line-height: 1.6;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .team-member {
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .team-member p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .why-us {
+            font-style: italic;
+            color: #333;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        footer {
+            position: relative;
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .footer-carbon-shape-1, .footer-carbon-shape-2, .footer-carbon-shape-3, .footer-carbon-shape-4 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.7;
+        }
+        .footer-carbon-shape-1 {
+            background: linear-gradient(45deg, #1f1f1f, #252525);
+            clip-path: polygon(0 0, 60% 0, 20% 100%, 0 100%);
+        }
+        .footer-carbon-shape-2 {
+            background: linear-gradient(45deg, #404040, #454545);
+            clip-path: polygon(60% 0, 100% 0, 100% 50%, 20% 100%);
+        }
+        .footer-carbon-shape-3 {
+            background: linear-gradient(45deg, #505050, #555555);
+            clip-path: polygon(0 30%, 20% 100%, 0 100%);
+        }
+        .footer-carbon-shape-4 {
+            background: linear-gradient(45deg, #333333, #383838);
+            clip-path: polygon(40% 0, 100% 0, 100% 20%, 60% 40%);
+        }
+        footer p {
+            position: relative;
+            z-index: 1;
+        }
+        footer a {
+            color: #A8D5BA;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: #8ABF9A;
+        }
+        .doc-links {
+            margin-top: 20px;
+        }
+        .doc-links a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #2E8B57;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .doc-links a:hover {
+            background-color: #256B43;
+        }
+        /* Адаптивность */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column; /* Вертикальное расположение */
+                padding: 20px;
+                min-height: 300px; /* Увеличиваем высоту для размещения */
+            }
+            .logo-container {
+                margin-bottom: 20px; /* Отступ снизу */
+            }
+            .logo {
+                width: 40px; /* Уменьшаем логотип */
+                height: 40px;
+            }
+            .logo-container h1 {
+                font-size: 28px; /* Уменьшаем шрифт */
+            }
+            .header-content {
+                max-width: 100%; /* Полная ширина */
+            }
+            .header-content h2 {
+                font-size: 20px; /* Уменьшаем заголовок */
+            }
+            .header-content p {
+                font-size: 14px; /* Уменьшаем текст */
+            }
+            .button {
+                padding: 10px 20px; /* Уменьшаем кнопку */
+                font-size: 14px;
+            }
+            .team-grid {
+                grid-template-columns: 1fr; /* Одна колонка для команды */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="carbon-shape-1"></div>
+        <div class="carbon-shape-2"></div>
+        <div class="carbon-shape-3"></div>
+        <div class="carbon-shape-4"></div>
+        <div class="logo-container">
+            <img src="logo.png" alt="XRPChange Logo" class="logo">
+            <h1>XRPChange</h1>
+        </div>
+        <div class="header-content">
+            <h2>Secure P2P Trading with 0.5% Fees</h2>
+            <p>P2P Bulletin Board with Collateral Guarantees on XRP Ledger.<br>
+            Learn More in Our Investor Presentation: <a href="[Insert PDF Link]" class="button">Download Here</a></p>
+        </div>
+    </header>
+
+    <section>
+        <h3>What We Do</h3>
+        <p>We solve high fees and risks in P2P trading with a P2P bulletin board using XRP Ledger. No AML, secure transactions, 0.5% fees.</p>
+    </section>
+
+    <section class="section-light">
+        <h3>How It Works</h3>
+        <ul style="list-style-position: inside; margin: 0 auto; max-width: 400px; text-align: left;">
+            <li>1. Register with AI KYC (2-5 mins).</li>
+            <li>2. Post a lot to buy/sell crypto or fiat.</li>
+            <li>3. Complete the transaction securely outside the platform.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Our Team</h3>
+        <div class="team-grid">
+            <div class="team-member">
+                <p><strong>Sergey Zhigar</strong></p>
+                <p>Backend Tech Lead, Idea Author</p>
+            </div>
+            <div class="team-member">
+                <p><strong>Petr Karpenin</strong></p>
+                <p>Promoter, Skilled Negotiator</p>
+            </div>
+            <div class="team-member">
+                <p><strong>Artem Byzgaev</strong></p>
+                <p>Frontend, 6+ Years Experience</p>
+            </div>
+            <div class="team-member">
+                <p><strong>Alexander Chupanov</strong></p>
+                <p>SMM, Young Specialist</p>
+            </div>
+        </div>
+        <p class="why-us">Why us? Technical expertise, negotiation, and promotion for secure P2P trading.</p>
+    </section>
+
+    <section class="section-light">
+        <h3>Market Opportunity</h3>
+        <p>$50B+ market in P2P trading. Goal: 500K users, $10B volume by 2027.</p>
+    </section>
+
+    <section>
+        <h3>Join Us</h3>
+        <p>Raising $1.5M to build an MVP. Join us in revolutionizing P2P trading!</p>
+        <div class="doc-links">
+            <a href="technical_doc.pdf">Technical Documentation</a>
+            <a href="investment_doc.pdf">Investment Documentation</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-carbon-shape-1"></div>
+        <div class="footer-carbon-shape-2"></div>
+        <div class="footer-carbon-shape-3"></div>
+        <div class="footer-carbon-shape-4"></div>
+        <p>Email: contact@xrpchange.io | X.com: @XRPChangeHQ | Download Presentation: <a href="[Insert PDF Link]">Download Here</a></p>
+    </footer>
+</body>
+</html>
